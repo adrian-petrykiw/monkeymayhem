@@ -51,7 +51,7 @@ const App = ({ Component, pageProps }) => {
         {/* <!-- 8thWall Web - Replace the app key here with your own app key --> */}
         <script
           defer
-          src="//apps.8thwall.com/xrweb?appKey=tirdbaDAooelYE6JwxlonnWJVjB4FThiStxs9Mxys7CRa6pXeCfN8DLRBnZ6I8UorzQ7u5"
+          src="//apps.8thwall.com/xrweb?appKey=kBNWJKSJcgqo6oonGp9FRT2aY8SGJm5AkP2zG1PQlbAZH3QL9DqOIi4nXphv4E5CJqk9JC"
         ></script>
 
         <script defer src="arComponent.js"></script>
