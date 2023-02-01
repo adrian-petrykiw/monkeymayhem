@@ -1,14 +1,136 @@
-import {namedWayspotComponent} from './named-wayspot'
-AFRAME.registerComponent('named-wayspot', namedWayspotComponent)
 
-import {playVpsAnimationComponent} from './vps-animation'
-AFRAME.registerComponent('play-vps-animation', playVpsAnimationComponent)
+AFRAME.registerComponent('named-wayspot', {
+  schema: {
+    name: {type: 'string'},
+  },
+  init() {
+    const {object3D} = this.el
+    const {name} = this.data
+    this.el.sceneEl.addEventListener('realityready', () => {
+      object3D.visible = false
+    })
 
-import {shadowShaderComponent} from './shadow-shader'
-AFRAME.registerComponent('shadow-shader', shadowShaderComponent)
+    const foundWayspot = ({detail}) => {
+      if (name !== detail.name) {
+        return
+      }
+      object3D.position.copy(detail.position)
+      object3D.quaternion.copy(detail.rotation)
+      object3D.visible = true
+    }
 
-import {desktopDevelopmentComponent} from './desktop-development'
-AFRAME.registerComponent('desktop-development', desktopDevelopmentComponent)
+    const lostWayspot = ({detail}) => {
+      if (name !== detail.name) {
+        return
+      }
+      object3D.visible = false
+    }
+
+    this.el.sceneEl.addEventListener('xrprojectwayspotfound', foundWayspot)
+    this.el.sceneEl.addEventListener('xrprojectwayspotlost', lostWayspot)
+  },
+})
+
+AFRAME.registerComponent('play-vps-animation', {
+  init() {
+    const overlayHidden = () => {
+      this.el.setAttribute('animation-mixer', 'clip: *')
+    }
+
+    const overlayVisible = () => {
+      this.el.removeAttribute('animation-mixer')
+    }
+
+    window.XR8.addCameraPipelineModule({
+      name: 'vps-coaching-overlay-listen',
+      listeners: [
+        {event: 'vps-coaching-overlay.hide', process: overlayHidden},
+        {event: 'vps-coaching-overlay.show', process: overlayVisible},
+      ],
+    })
+  },
+})
+
+AFRAME.registerComponent('shadow-shader', {
+  schema: {
+    'opacity': {default: 0.4},
+  },
+  update() {
+    if (typeof AFRAME === 'undefined') {
+      throw new Error('Component attempted to register before AFRAME was available.')
+    }
+
+    const shadowMaterial = new THREE.ShadowMaterial()
+    shadowMaterial.opacity = this.data.opacity
+    shadowMaterial.transparent = true
+    shadowMaterial.polygonOffset = true
+    shadowMaterial.polygonOffsetFactor = -4
+
+    const applyShadowMaterial = (mesh) => {
+      if (!mesh) {
+        return
+      }
+      if (mesh.material) {
+        mesh.material = shadowMaterial
+        mesh.material.needsUpdate = true
+      }
+      mesh.traverse((node) => {
+        if (node.isMesh) {
+          node.material = shadowMaterial
+        }
+      })
+    }
+
+    this.el.getObject3D('mesh') ? applyShadowMaterial(this.el.getObject3D('mesh')) : this.el.addEventListener('model-loaded', () => {
+      applyShadowMaterial(this.el.getObject3D('mesh'))
+      this.el.object3D.traverse((obj) => {
+        obj.frustumCulled = false
+      })
+    })
+  },
+})
+
+AFRAME.registerComponent('desktop-development', {
+  schema: {
+    inspector: {type: 'boolean', default: true},
+  },
+  init() {
+    const onAttach = ({sessionAttributes}) => {
+      const s = sessionAttributes
+      const isDesktop = !s.cameraLinkedToViewer && !s.controlsCamera && !s.fillsCameraTexture && !s.supportsHtmlEmbedded && s.supportsHtmlOverlay && !s.usesMediaDevices && !s.usesWebXr
+
+      const namedWayspot = document.querySelector('[named-wayspot]')
+      const occluder = document.querySelector('[xrextras-hider-material]')
+
+      const scene = this.el
+      const removeXRandExtras = () => {
+        scene.removeAttribute('landing-page')
+        scene.removeAttribute('xrextras-loading')
+        scene.removeAttribute('xrextras-gesture-detector')
+        scene.removeAttribute('xrextras-runtime-error')
+        scene.removeAttribute('vps-coaching-overlay')
+
+        namedWayspot.removeAttribute('named-wayspot')
+        occluder.removeAttribute('xrextras-hider-material')
+
+        scene.removeAttribute('xrweb')
+
+        if (this.data.inspector) {
+          scene.components.inspector.openInspector()
+          scene.renderer.autoClearColor = true
+        }
+      }
+
+      if (isDesktop) {
+        removeXRandExtras()
+      }
+    }
+    const onxrloaded = () => {
+      XR8.addCameraPipelineModules([{'name': 'desktopDevelopment', onAttach}])
+    }
+    window.XR8 ? onxrloaded() : window.addEventListener('xrloaded', onxrloaded)
+  },
+})
 
 // Check Location Permissions at beginning of session
 const errorCallback = (error) => {
