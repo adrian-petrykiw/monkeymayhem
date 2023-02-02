@@ -12,9 +12,6 @@ import "./App.css";
 
 import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react";
 
-const clientId =
-  "BIIU4bVmt3jB5eQTkYVBH3uxz9nV9PMbmIJ8R7BsNeWLIQe9kOU5Jaqpp_kDVXqeJgcaZLzQSTi7-MzB6Ty7jFU"; // get from https://dashboard.web3auth.io
-
 function App() {
   // const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3AuthCore | null>(null);
@@ -43,25 +40,28 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
-        const web3auth = new Web3AuthCore({
-          clientId,
-          web3AuthNetwork: "mainnet", // mainnet, aqua, celeste, cyan or testnet
-          chainConfig: {
-            chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: "0x1",
-            rpcTarget: "https://rpc.ankr.com/solana", // This is the public RPC we have added, please pass on your own endpoint while creating an app
-          },
-        });
+        const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_ID;
 
-        setWeb3auth(web3auth);
+        if (clientId) {
+          const web3auth = new Web3AuthCore({
+            clientId,
+            web3AuthNetwork: "mainnet", // mainnet, aqua, celeste, cyan or testnet
+            chainConfig: {
+              chainNamespace: CHAIN_NAMESPACES.SOLANA,
+              chainId: "0x1",
+              rpcTarget: "https://rpc.ankr.com/solana", // This is the public RPC we have added, please pass on your own endpoint while creating an app
+            },
+          });
+          setWeb3auth(web3auth);
 
-        const openloginAdapter = new OpenloginAdapter();
-        web3auth.configureAdapter(openloginAdapter);
-        // await web3auth.initModal();
-        await web3auth.init();
+          const openloginAdapter = new OpenloginAdapter();
+          web3auth.configureAdapter(openloginAdapter);
+          // await web3auth.initModal();
+          await web3auth.init();
 
-        if (web3auth.provider) {
-          setProvider(web3auth.provider);
+          if (web3auth.provider) {
+            setProvider(web3auth.provider);
+          }
         }
       } catch (error) {
         console.error(error);

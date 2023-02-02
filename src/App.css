@@ -20,6 +20,7 @@
 	text-align: center;
 	margin: 50px;
 	font-family: Gloria Hallelujah;
+	color: #FFD100;
 }
 
 .title a {
@@ -29,6 +30,7 @@
 
 .grid {
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 }
@@ -38,7 +40,7 @@
 	padding: 0.7rem;
 	text-align: center;
 	color: #0070f3;
-	background-color: #fafafa;
+	background-color: #FFD100;
 	text-decoration: none;
 	border: 1px solid #0070f3;
 	border-radius: 10px;
