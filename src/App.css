@@ -18,11 +18,16 @@
   background-color: #2E1503;
 }
 
+.body {
+  width: 100%;
+  height: 100%;
+}
+
 .title {
   line-height: 1.15;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
-  margin: 3rem 0rem 2rem 0rem;
+  margin: 2rem 1rem 2rem 1rem;
   font-family: Gloria Hallelujah;
   color: #ffd100;
 }
@@ -33,7 +38,7 @@
   align-items: center;
   padding: 0rem 0rem 0rem 0rem;
   margin: 1rem 0rem 0rem 0rem;
-  font-size: 36px;
+  font-size: 3rem;
   font-family: Gloria Hallelujah;
   color: #ffd100;
 }

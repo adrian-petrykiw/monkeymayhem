@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {}, []);
 
   return (
-    <div>
+    <div className="body">
       <div className="container">
         <h1 className="title">Monkey Mayhem</h1>
 
