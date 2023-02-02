@@ -15,11 +15,6 @@
   color: #ffd100;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
 .grid {
   display: flex;
   justify-content: center;
@@ -29,7 +24,7 @@
 
 .card {
   margin: 1rem;
-  padding: 0.5rem 1rem !important;
+  padding: 0.5rem 1rem;
   text-align: center;
   color: #000000;
   background-color: #FFC200;

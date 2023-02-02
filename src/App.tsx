@@ -12,6 +12,8 @@ import "./App.css";
 
 import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react";
 
+// const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_ID;
+
 function App() {
   // const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
   const [web3auth, setWeb3auth] = useState<Web3AuthCore | null>(null);
@@ -40,11 +42,8 @@ function App() {
   useEffect(() => {
     const init = async () => {
       try {
-        const clientId = process.env.NEXT_PUBLIC_WEB3_AUTH_ID;
-
-        if (clientId) {
           const web3auth = new Web3AuthCore({
-            clientId,
+            clientId: "BCRbV1F20llOzOnWn60RaRCL8unPts8qziUQa2JXM-WybSTM2mbHrAIOyArvrIL3c1TGq_WBEBRf7oh34k5DQ_w",
             web3AuthNetwork: "mainnet", // mainnet, aqua, celeste, cyan or testnet
             chainConfig: {
               chainNamespace: CHAIN_NAMESPACES.SOLANA,
@@ -62,7 +61,6 @@ function App() {
           if (web3auth.provider) {
             setProvider(web3auth.provider);
           }
-        }
       } catch (error) {
         console.error(error);
       }
@@ -70,10 +68,6 @@ function App() {
 
     init();
   }, []);
-
-async function handleLogin() {
-  await login;
-}
 
   const login = async () => {
     if (!web3auth) {
@@ -84,7 +78,7 @@ async function handleLogin() {
     const web3authProvider = await web3auth.connectTo(
       WALLET_ADAPTERS.OPENLOGIN,
       {
-        // mfaLevel: "none", // Pass on the mfa level of your choice: default, optional, mandatory, none
+        mfaLevel: "none", // Pass on the mfa level of your choice: default, optional, mandatory, none
         loginProvider: "google",
       }
     );
@@ -181,7 +175,7 @@ async function handleLogin() {
         Log Out
       </button>
       <div id="console" style={{ whiteSpace: "pre-line" }}>
-        <p style={{ whiteSpace: "pre-line" }}>Solana login successful!</p>
+        <p style={{ whiteSpace: "pre-line", color: "white" }}>Solana login successful!</p>
       </div>
     </div>
   );
@@ -232,7 +226,7 @@ async function handleLogin() {
       </div>
 
       <div id="console" style={{ whiteSpace: "pre-line" }}>
-        <p style={{ whiteSpace: "pre-line" }}>Email login successful!</p>
+        <p style={{ whiteSpace: "pre-line", color: "white"}}>Email login successful!</p>
       </div>
     </div>
   );
@@ -248,7 +242,7 @@ async function handleLogin() {
         />
       </div>
       <div>
-        <button onClick={handleLogin} className="card">
+        <button onClick={login} className="card">
           Redeem with Google
         </button>
       </div>
