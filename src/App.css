@@ -6,6 +6,17 @@
   align-items: center;
 }
 
+.rewardcontainer {
+  padding: 0rem 2rem 2rem 2rem;
+  margin: 3rem 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background-color: #2E1503;
+}
+
 .title {
   line-height: 1.15;
   font-size: 3rem;
@@ -13,6 +24,25 @@
   margin: 50px;
   font-family: Gloria Hallelujah;
   color: #ffd100;
+}
+
+.rewardtitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 0rem 0rem 0rem;
+  margin: 1rem 0rem 0rem 0rem;
+  font-size: 36px;
+  font-family: Gloria Hallelujah;
+  color: #ffd100;
+}
+
+
+.eightwall {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .grid {
@@ -23,11 +53,11 @@
 }
 
 .card {
-  margin: 1rem;
+  margin: 0rem 0rem 1rem 0rem;
   padding: 0.5rem 1rem;
   text-align: center;
   color: #000000;
-  background-color: #FFC200;
+  background-color: #ffd100;
   font-family: Gloria Hallelujah;
   font-weight: 700;
   border: 1px none transparent;
@@ -36,9 +66,9 @@
 }
 
 .dynamicButton {
-  background-color: #2E1503 !important;
+  background-color: #0a9333 !important;
   color: white !important;
-  margin: 1rem !important;
+  margin: 1rem 0rem 1.5rem 0rem !important;
   padding: 0.75rem 1.5rem !important;
   border-color: transparent !important;
   border: 0px !important;
