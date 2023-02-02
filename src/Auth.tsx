@@ -256,7 +256,7 @@ function Auth() {
     <div>
         <div className="rewardcontainer">
         <h1 className="rewardtitle">Redeem Reward</h1>
-        <div className="grid">
+        <div>
           {provider || user ? loggedInView : loggedoutView}
         </div>            
         </div>

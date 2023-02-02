@@ -9,8 +9,7 @@ import {
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import RPC from "./solanaRPC";
 import "./App.css";
-import  Auth from "./Auth";
-
+import Auth from "./Auth";
 
 import { DynamicWidget, useDynamicContext } from "@dynamic-labs/sdk-react";
 
@@ -39,25 +38,26 @@ function App() {
     }
   }, [user?.walletPublicKey]);
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div>
       <div className="container">
         <h1 className="title">Monkey Mayhem</h1>
 
-        <div className="grid">
-        <iframe
-        title="8thwall"
-        className="h-140 w-full"
-        src="https://8thwall.8thwall.app/vps-world-explorer/"
-        allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;geolocation;"
-      />
+        <div className="eightwall">
+          <iframe
+            title="frame"
+            className="iframe"
+            src="https://vpsworldtourmiami.8thwall.app/monkey-mayhem/"
+            allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;geolocation;"
+          />
         </div>
 
-        <Auth />
+        {/* <div>
+          <Auth />
+        </div> */}
+
 
         <footer className="footer">
           <a

@@ -1,14 +1,15 @@
 .container {
   width: 100%;
+  height: 100%;
   display: grid;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: space-between;
 }
 
 .rewardcontainer {
   padding: 0rem 2rem 2rem 2rem;
-  margin: 3rem 3rem 3rem 3rem;
+  margin: 3rem 3rem 0rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +22,7 @@
   line-height: 1.15;
   font-size: 3rem;
   text-align: center;
-  margin: 50px;
+  margin: 3rem 0rem 2rem 0rem;
   font-family: Gloria Hallelujah;
   color: #ffd100;
 }
@@ -42,7 +43,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
   width: 100%;
+}
+
+.iframe {
+  width: 90%;
+  height: 35rem;
 }
 
 .grid {
@@ -85,12 +92,12 @@
 .footer {
   display: flex;
   flex: 1;
-  padding: 1rem 0;
+  padding: 1rem 0rem;
   justify-content: space-between;
-  border-top: 1px solid #eaeaea;
+  /* border-top: 1px solid #eaeaea; */
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .footer a {
