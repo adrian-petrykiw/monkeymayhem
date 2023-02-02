@@ -71,6 +71,10 @@ function App() {
     init();
   }, []);
 
+async function handleLogin() {
+  await login;
+}
+
   const login = async () => {
     if (!web3auth) {
       uiConsole("web3auth not initialized yet");
@@ -244,7 +248,7 @@ function App() {
         />
       </div>
       <div>
-        <button onClick={login} className="card">
+        <button onClick={handleLogin} className="card">
           Redeem with Google
         </button>
       </div>
@@ -252,7 +256,8 @@ function App() {
   );
 
   return (
-    <div className="container">
+    <div>
+          <div className="container">
       <h1 className="title">Monkey Mayhem</h1>
 
       <div className="grid">
@@ -277,6 +282,9 @@ function App() {
         </a>
       </footer>
     </div>
+
+    </div>
+
   );
 }
 
