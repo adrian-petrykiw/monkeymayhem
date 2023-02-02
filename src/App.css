@@ -27,7 +27,7 @@
   line-height: 1.15;
   font-size: 2rem;
   text-align: center;
-  margin: 2rem 1rem 1rem 1rem;
+  margin: 1rem 1rem 1rem 1rem;
   font-family: Gloria Hallelujah;
   color: #ffd100;
 }
@@ -53,8 +53,8 @@
 }
 
 .iframe {
-  width: 100%;
-  height: 38rem;
+  width: 22rem;
+  height: 40rem;
 }
 
 .grid {
