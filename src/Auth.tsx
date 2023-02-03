@@ -168,14 +168,24 @@ function Auth() {
     }
   }
 
+  const dLogout = async () => {
+    if (!currentWallet) {
+      uiConsole("wallet not initialized yet");
+      return;
+    }
+    await handleLogOut;
+    setCurrentWallet(null);
+    window.location.reload();
+  };
+
   const dynamicLogout = (
     <div>
-      <button className="card" onClick={handleLogOut}>
+      <button className="card" onClick={dLogout}>
         Log Out
       </button>
       <div id="console" style={{ whiteSpace: "pre-line" }}>
         <p style={{ whiteSpace: "pre-line", color: "white" }}>
-          Solana login successful!
+          Solana login successful! View your NFT reward in your wallet
         </p>
       </div>
     </div>
@@ -184,11 +194,12 @@ function Auth() {
   const regularLogout = (
     <div>
       <div className="flex-container">
-        {/* <div>
+        <div>
           <button onClick={getUserInfo} className="card">
             Get User Info
           </button>
         </div>
+        {/* 
         <div>
           <button onClick={authenticateUser} className="card">
             Get ID Token
@@ -214,11 +225,12 @@ function Auth() {
             Sign Message
           </button>
         </div>
+        */}
         <div>
           <button onClick={getPrivateKey} className="card">
             Get Private Key
           </button>
-        </div> */}
+        </div>
         <div>
           <button onClick={logout} className="card">
             Log Out
@@ -228,7 +240,8 @@ function Auth() {
 
       <div id="console" style={{ whiteSpace: "pre-line" }}>
         <p style={{ whiteSpace: "pre-line", color: "white" }}>
-          Email login successful!
+          Email login successful! You can export you public and private key to
+          view your NFTs in your wallet
         </p>
       </div>
     </div>
@@ -254,12 +267,10 @@ function Auth() {
 
   return (
     <div>
-        <div className="rewardcontainer">
+      <div className="rewardcontainer">
         <h1 className="rewardtitle">Redeem Reward</h1>
-        <div>
-          {provider || user ? loggedInView : loggedoutView}
-        </div>            
-        </div>
+        <div>{provider || user ? loggedInView : loggedoutView}</div>
+      </div>
     </div>
   );
 }

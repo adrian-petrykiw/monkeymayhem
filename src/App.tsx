@@ -21,6 +21,7 @@ function App() {
   );
   const [currentWallet, setCurrentWallet] = useState<String | null>(null);
   const [dynamicStatus, setDynamicStatus] = useState(false);
+  const [mr, setMR] = useState(false);
 
   const {
     user,
@@ -36,6 +37,13 @@ function App() {
       setCurrentWallet(user.walletPublicKey);
       setDynamicStatus(true);
     }
+
+    window.onmessage = function (e) {
+      if (e.data == "hello") {
+        alert("You won!");
+        setMR(true);
+      }
+    };
   }, [user?.walletPublicKey]);
 
   useEffect(() => {}, []);
@@ -44,7 +52,14 @@ function App() {
     <div className="body">
       <div className="container">
         <h1 className="title">Monkey Mayhem</h1>
-
+        {mr ? (
+          <div>
+            <Auth />
+          </div>
+        ) : (
+          <div>
+          </div>
+        )}
         <div className="eightwall">
           <iframe
             title="frame"
@@ -53,12 +68,6 @@ function App() {
             allow="camera;gyroscope;accelerometer;magnetometer;xr-spatial-tracking;microphone;geolocation;"
           />
         </div>
-
-        {/* <div>
-          <Auth />
-        </div> */}
-
-
         <footer className="footer">
           <a
             href="https://docs.google.com/document/d/1Lu1p_RpNh1k0RUjsf6GCjlygCdKE467NFNGUYCBnK1I/edit?usp=sharing"
