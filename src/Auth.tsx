@@ -173,9 +173,9 @@ function Auth() {
       uiConsole("wallet not initialized yet");
       return;
     }
-    await handleLogOut;
+    await handleLogOut();
     setCurrentWallet(null);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const dynamicLogout = (
