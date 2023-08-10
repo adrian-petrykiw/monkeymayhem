@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Monkey Mayhem - Geospatial AR Minigames with web3 rewards
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
