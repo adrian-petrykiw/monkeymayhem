@@ -38,7 +38,7 @@ const Navigation = () => {
   const pages = [
     { href: '/', name: 'Home' },
     { href: '/ar-page', name: 'AR Page' },
-    { href: '/account-info', name: 'Account Info' },
+    { href: '/auth', name: 'Auth' },
   ];
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { address, isConnecting, isDisconnected } = useAccount();
@@ -61,7 +61,7 @@ const Navigation = () => {
         boxShadow="xl"
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <IconButton
+          {/* <IconButton
             size={'md'}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
@@ -69,11 +69,11 @@ const Navigation = () => {
             onClick={isOpen ? onClose : onOpen}
             mr={2}
             bg={useColorModeValue('blue.400', 'blue.400')}
-          />
+          /> */}
           <HStack spacing={8} alignItems={'center'}>
-            <Box>
+            {/* <Box>
               <Heading size="m">AR Web3 Starter</Heading>
-            </Box>
+            </Box> */}
             <HStack
               as={'nav'}
               spacing={4}

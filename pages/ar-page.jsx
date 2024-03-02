@@ -71,14 +71,14 @@ const ArPage = () => {
     </IconButton>
     </Link>
     <Container fluid mt={8} >
-      <Grid fluid justifyItems={'center'}>
+      {/* <Grid fluid justifyItems={'center'}>
         <GridItem>
         Time Remaining: {seconds}
         <br />
         Points: {earnedPoints}
         </GridItem>
 
-      </Grid>  
+      </Grid>   */}
       <Center>
           <Box
           dangerouslySetInnerHTML={{

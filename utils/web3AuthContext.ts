@@ -1,7 +1,7 @@
 import { Web3Auth, Web3AuthOptions } from '@web3auth/modal';
 import { CHAIN_NAMESPACES, SafeEventEmitterProvider } from '@web3auth/base';
 import { useState, useEffect, createContext } from 'react';
-import { TorusWalletAdapter } from '@web3auth/torus-evm-adapter';
+import { OpenloginAdapter } from '@web3auth/torus-evm-adapter';
 import RPC from './ethersRPC';
 
 export const useWeb3AuthHook = () => {
@@ -30,30 +30,27 @@ export const useWeb3AuthHook = () => {
           },
         });
 
-        // const openloginAdapter = new OpenloginAdapter({
-        //   loginSettings: {
-        //     mfaLevel: 'none', // Pass on the mfa level of your choice: default, optional, mandatory, none
-        //   },
-        // });
-
-        const torusWalletAdapter = new TorusWalletAdapter({
-          initParams: {
-            // type WhiteLabelParams
-            whiteLabel: {
-              theme: {
-                isDark: true,
-                colors: { torusBrand1: '#FFA500' },
-              },
-              logoDark: 'https://images.web3auth.io/web3auth-logo-w.svg',
-              logoLight: 'https://images.web3auth.io/web3auth-logo-w-light.svg',
-              topupHide: true,
-              featuredBillboardHide: true,
-              disclaimerHide: true,
-              defaultLanguage: 'en',
-            },
+        const openloginAdapter = new OpenloginAdapter({
+          loginSettings: {
+            mfaLevel: "default", // Pass on the mfa level of your choice: default, optional, mandatory, none
           },
+          adapterSettings: {
+            uxMode: "popup",
+            loginConfig: {
+              // Add login configs corresponding to the provider
+              // Google login
+              google: {
+                name: "Google Login", // The desired name you want to show on the login button
+                verifier: "mm-google-core-verifier-ssv-test", // Please create a verifier on the developer dashboard and pass the name here
+                typeOfLogin: "google", // Pass on the login provider of the verifier you've created
+                clientId: "601464628567-a1ghke58o2aqtog6udkpc9j811stblg4.apps.googleusercontent.com", // use your app client id you got from google
+              },
+              // Add other login providers here
+            },
+          }
         });
-        web3auth.configureAdapter(torusWalletAdapter);
+
+        web3auth.configureAdapter(openloginAdapter);
 
         setWeb3auth(web3auth);
 
